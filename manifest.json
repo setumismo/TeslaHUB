@@ -1,0 +1,35 @@
+{
+  "name": "Tesla Drive Hub",
+  "short_name": "Tesla Hub",
+  "description": "Dashboard optimizado para Tesla Model Y - Simula Android Auto/CarPlay",
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><path d='M50 20 L80 50 L50 80 L20 50 Z' fill='%2300ffff'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><path d='M50 20 L80 50 L50 80 L20 50 Z' fill='%2300ffff'/></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity", "navigation"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1200'><rect width='1920' height='1200' fill='%23000'/></svg>",
+      "sizes": "1920x1200",
+      "type": "image/svg+xml",
+      "label": "Tesla Drive Hub Dashboard"
+    }
+  ],
+  "lang": "es-ES",
+  "dir": "ltr"
+}

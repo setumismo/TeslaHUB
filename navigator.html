@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tesla Navigator Local</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Header */
+        .nav-header {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 10, 0.9) 100%);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-title svg {
+            color: #ff6b35;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.6));
+        }
+
+        .nav-title h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8e53 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 0.75rem;
+            color: #ff6b35;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 107, 53, 0.2);
+            border-color: #ff6b35;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .nav-btn.primary {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8e53 100%);
+            color: #000;
+            border-color: #ff6b35;
+        }
+
+        .nav-btn.primary:hover {
+            background: linear-gradient(135deg, #ff8e53 0%, #ffa066 100%);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+        }
+
+        /* Main Content */
+        .nav-main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .nav-sidebar {
+            background: rgba(10, 10, 10, 0.95);
+            border-right: 1px solid rgba(255, 107, 53, 0.2);
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-section h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: #999;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 0.5rem;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+        }
+
+        .waypoint-list {
+            list-style: none;
+        }
+
+        .waypoint-item {
+            background: rgba(255, 107, 53, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .waypoint-item span {
+            flex: 1;
+        }
+
+        .waypoint-remove {
+            background: rgba(255, 51, 102, 0.2);
+            border: none;
+            color: #ff3366;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .waypoint-remove:hover {
+            background: rgba(255, 51, 102, 0.4);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            color: #00ff88;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        /* Map */
+        #map {
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+        }
+
+        .leaflet-container {
+            background: #0a0a0a;
+        }
+
+        /* Custom Markers */
+        .custom-marker {
+            background: #ff6b35;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.6);
+        }
+
+        .charger-marker {
+            background: #00ff88;
+        }
+
+        /* Scrollbar */
+        .nav-sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .nav-sidebar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 107, 53, 0.5);
+            border-radius: 4px;
+        }
+
+        .nav-sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 107, 53, 0.7);
+        }
+
+        /* Info Panel */
+        .info-panel {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-panel h4 {
+            color: #00ff88;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .info-panel ul {
+            list-style: none;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .info-panel li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-panel li:before {
+            content: "⚡";
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <!-- Header -->
+        <header class="nav-header">
+            <div class="nav-title">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <h1>Tesla Navigator</h1>
+            </div>
+            <div class="nav-controls">
+                <button class="nav-btn" onclick="clearRoute()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    Limpiar Ruta
+                </button>
+                <button class="nav-btn primary" onclick="calculateRoute()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                    </svg>
+                    Calcular Ruta
+                </button>
+                <button class="nav-btn" onclick="window.close()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    Cerrar
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="nav-main">
+            <!-- Sidebar -->
+            <aside class="nav-sidebar">
+                <div class="sidebar-section">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="10" r="3"></circle>
+                            <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"></path>
+                        </svg>
+                        Planificación de Ruta
+                    </h3>
+                    <div class="input-group">
+                        <label>Origen</label>
+                        <input type="text" id="origin" placeholder="Barcelona, España">
+                    </div>
+                    <div class="input-group">
+                        <label>Destino</label>
+                        <input type="text" id="destination" placeholder="Madrid, España">
+                    </div>
+                    <button class="nav-btn primary" style="width: 100%; margin-top: 1rem;" onclick="addWaypoint()">
+                        + Añadir Parada
+                    </button>
+                </div>
+
+                <div class="sidebar-section" id="waypointsSection" style="display: none;">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                        Paradas Intermedias
+                    </h3>
+                    <ul class="waypoint-list" id="waypointList"></ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                        Estadísticas
+                    </h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalDistance">--</div>
+                            <div class="stat-label">Distancia (km)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalTime">--</div>
+                            <div class="stat-label">Tiempo (h)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="battery">87%</div>
+                            <div class="stat-label">Batería</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="chargers">0</div>
+                            <div class="stat-label">Cargadores</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-panel">
+                    <h4>📍 Funcionalidades</h4>
+                    <ul>
+                        <li>Planificación multi-parada</li>
+                        <li>Cálculo de autonomía</li>
+                        <li>Puntos de recarga cercanos</li>
+                        <li>Optimización de ruta</li>
+                        <li>Mapas interactivos</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Map -->
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Inicializar mapa
+        const map = L.map('map').setView([41.3851, 2.1734], 6);
+
+        // Capa de mapa oscuro
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+            maxZoom: 19
+        }).addTo(map);
+
+        let waypoints = [];
+        let markers = [];
+        let routeLine = null;
+
+        // Añadir parada
+        function addWaypoint() {
+            const waypointName = prompt('Nombre de la parada:', '');
+            if (waypointName) {
+                waypoints.push(waypointName);
+                updateWaypointList();
+            }
+        }
+
+        // Actualizar lista de paradas
+        function updateWaypointList() {
+            const list = document.getElementById('waypointList');
+            const section = document.getElementById('waypointsSection');
+            
+            if (waypoints.length > 0) {
+                section.style.display = 'block';
+                list.innerHTML = waypoints.map((wp, index) => `
+                    <li class="waypoint-item">
+                        <span>${index + 1}. ${wp}</span>
+                        <button class="waypoint-remove" onclick="removeWaypoint(${index})">×</button>
+                    </li>
+                `).join('');
+            } else {
+                section.style.display = 'none';
+            }
+        }
+
+        // Eliminar parada
+        function removeWaypoint(index) {
+            waypoints.splice(index, 1);
+            updateWaypointList();
+        }
+
+        // Calcular ruta
+        async function calculateRoute() {
+            const origin = document.getElementById('origin').value;
+            const destination = document.getElementById('destination').value;
+
+            if (!origin || !destination) {
+                alert('Por favor, introduce origen y destino');
+                return;
+            }
+
+            // Limpiar markers anteriores
+            markers.forEach(m => map.removeLayer(m));
+            markers = [];
+            if (routeLine) map.removeLayer(routeLine);
+
+            try {
+                // Geocoding del origen
+                const originCoords = await geocode(origin);
+                const destCoords = await geocode(destination);
+
+                // Añadir markers
+                const originMarker = L.marker(originCoords, {
+                    icon: L.divIcon({
+                        className: 'custom-marker',
+                        html: '🚗',
+                        iconSize: [30, 30]
+                    })
+                }).addTo(map).bindPopup(`Origen: ${origin}`);
+
+                const destMarker = L.marker(destCoords, {
+                    icon: L.divIcon({
+                        className: 'custom-marker',
+                        html: '🏁',
+                        iconSize: [30, 30]
+                    })
+                }).addTo(map).bindPopup(`Destino: ${destination}`);
+
+                markers.push(originMarker, destMarker);
+
+                // Dibujar línea de ruta
+                routeLine = L.polyline([originCoords, destCoords], {
+                    color: '#ff6b35',
+                    weight: 4,
+                    opacity: 0.7
+                }).addTo(map);
+
+                // Ajustar vista
+                map.fitBounds(routeLine.getBounds(), { padding: [50, 50] });
+
+                // Calcular distancia aproximada
+                const distance = map.distance(originCoords, destCoords) / 1000;
+                const time = (distance / 120).toFixed(1);
+
+                document.getElementById('totalDistance').textContent = Math.round(distance);
+                document.getElementById('totalTime').textContent = time;
+
+                // Simular cargadores cercanos
+                addChargers(originCoords, destCoords);
+
+            } catch (error) {
+                console.error('Error calculando ruta:', error);
+                alert('Error al calcular la ruta. Por favor, verifica las direcciones.');
+            }
+        }
+
+        // Geocoding simple
+        async function geocode(address) {
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            if (data && data.length > 0) {
+                return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+            }
+            throw new Error('No se encontró la dirección');
+        }
+
+        // Añadir cargadores simulados
+        function addChargers(origin, dest) {
+            const midLat = (origin[0] + dest[0]) / 2;
+            const midLon = (origin[1] + dest[1]) / 2;
+
+            // Añadir 2-3 cargadores simulados
+            const chargersCount = Math.floor(Math.random() * 2) + 2;
+            document.getElementById('chargers').textContent = chargersCount;
+
+            for (let i = 0; i < chargersCount; i++) {
+                const offsetLat = (Math.random() - 0.5) * 0.5;
+                const offsetLon = (Math.random() - 0.5) * 0.5;
+                
+                const chargerMarker = L.marker([midLat + offsetLat, midLon + offsetLon], {
+                    icon: L.divIcon({
+                        className: 'custom-marker charger-marker',
+                        html: '⚡',
+                        iconSize: [25, 25]
+                    })
+                }).addTo(map).bindPopup('Supercharger Tesla');
+
+                markers.push(chargerMarker);
+            }
+        }
+
+        // Limpiar ruta
+        function clearRoute() {
+            markers.forEach(m => map.removeLayer(m));
+            markers = [];
+            if (routeLine) map.removeLayer(routeLine);
+            
+            waypoints = [];
+            updateWaypointList();
+            
+            document.getElementById('origin').value = '';
+            document.getElementById('destination').value = '';
+            document.getElementById('totalDistance').textContent = '--';
+            document.getElementById('totalTime').textContent = '--';
+            document.getElementById('chargers').textContent = '0';
+            
+            map.setView([41.3851, 2.1734], 6);
+        }
+
+        // Inicializar con Barcelona
+        document.getElementById('origin').value = 'Barcelona, España';
+
+        console.log('🗺️ Tesla Navigator Local - v1.0.0');
+    </script>
+</body>
+</html>

@@ -81,13 +81,39 @@
                             <span>Google Maps</span>
                         </button>
                     </div>
+                    <div class="boardinggate-section">
+                        <div class="bg-label">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Tesla Navigator Avanzado</span>
+                        </div>
+                        <div class="bg-buttons">
+                            <button class="nav-btn boardinggate original" onclick="openApp('https://boardinggate.github.io/Tesla/tesla.html')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                <span>BoardingGate Original</span>
+                            </button>
+                            <button class="nav-btn boardinggate local" onclick="openLocalNavigator()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                                <span>Navigator Local</span>
+                            </button>
+                        </div>
+                    </div>
                     <div class="quick-info">
                         <div class="info-badge">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <polyline points="12 6 12 12 16 14"></polyline>
                             </svg>
-                            <span>Tráfico en tiempo real</span>
+                            <span>Navegación en tiempo real</span>
                         </div>
                     </div>
                 </div>
@@ -224,7 +250,7 @@
                         <h2>Accesos</h2>
                     </div>
                     <div class="shortcuts-grid">
-                        <button class="shortcut-btn" onclick="openBrowser()">
+                        <button class="shortcut-btn" onclick="openApp('https://www.google.com')">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <line x1="2" y1="12" x2="22" y2="12"></line>
@@ -258,8 +284,8 @@
             </section>
         </main>
 
-        <!-- Modal para apps fullscreen -->
-        <div id="appModal" class="app-modal">
+        <!-- Modal para apps fullscreen (legacy - puede eliminarse) -->
+        <div id="appModal" class="app-modal" style="display: none;">
             <div class="modal-header">
                 <button class="back-btn" onclick="closeApp()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -270,52 +296,6 @@
                 </button>
             </div>
             <iframe id="appFrame" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"></iframe>
-        </div>
-
-        <!-- Navegador Web -->
-        <div id="browserModal" class="app-modal">
-            <div class="browser-header">
-                <div class="browser-controls">
-                    <button class="browser-btn" onclick="browserBack()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="15 18 9 12 15 6"></polyline>
-                        </svg>
-                    </button>
-                    <button class="browser-btn" onclick="browserForward()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </button>
-                    <button class="browser-btn" onclick="browserReload()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="23 4 23 10 17 10"></polyline>
-                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                        </svg>
-                    </button>
-                    <button class="browser-btn home-btn" onclick="browserHome()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div class="url-bar-container">
-                    <input type="text" id="urlBar" class="url-bar" placeholder="Escribe una URL o búsqueda...">
-                    <button class="browser-btn go-btn" onclick="browserNavigate()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </button>
-                </div>
-                <button class="back-btn" onclick="closeBrowser()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                    <span>Cerrar</span>
-                </button>
-            </div>
-            <iframe id="browserFrame" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals allow-top-navigation"></iframe>
         </div>
     </div>
 

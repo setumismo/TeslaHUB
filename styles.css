@@ -663,10 +663,110 @@ body {
     transform: scale(0.95) translateX(-4px);
 }
 
-#appFrame {
+#appFrame, #browserFrame {
     flex: 1;
     width: 100%;
     border: none;
+}
+
+/* ===== BROWSER INTERFACE ===== */
+.browser-header {
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.browser-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.browser-btn {
+    width: 3rem;
+    height: 3rem;
+    background: var(--bg-secondary);
+    border: 2px solid rgba(0, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    color: var(--accent-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.browser-btn:hover {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.browser-btn:active {
+    transform: scale(0.95);
+}
+
+.browser-btn.home-btn {
+    border-color: rgba(255, 0, 255, 0.2);
+    color: var(--accent-secondary);
+}
+
+.browser-btn.home-btn:hover {
+    background: rgba(255, 0, 255, 0.1);
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+}
+
+.url-bar-container {
+    flex: 1;
+    display: flex;
+    gap: 0.5rem;
+    min-width: 300px;
+}
+
+.url-bar {
+    flex: 1;
+    height: 3rem;
+    background: var(--bg-card);
+    border: 2px solid rgba(0, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    padding: 0 1.5rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.url-bar:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.url-bar::placeholder {
+    color: var(--text-tertiary);
+}
+
+.go-btn {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--bg-primary);
+}
+
+.go-btn:hover {
+    background: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+    box-shadow: var(--glow-primary);
+}
+
+.browser-header .back-btn {
+    margin-left: auto;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
 }
 
 /* ===== RESPONSIVE ADJUSTMENTS ===== */

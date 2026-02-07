@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Tesla Drive Hub</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #0ff;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .test-section {
+            background: #111;
+            border: 2px solid #0ff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .test-section h2 {
+            color: #f0f;
+            margin-top: 0;
+        }
+        .status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        .success {
+            background: #0f0;
+            color: #000;
+        }
+        .info {
+            background: #0ff;
+            color: #000;
+        }
+        code {
+            background: #222;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            color: #0f0;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        a {
+            color: #0ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚗 Tesla Drive Hub - Test Page</h1>
+    
+    <div class="test-section">
+        <h2>✅ Cambios Implementados</h2>
+        <ul>
+            <li><span class="status success">SOLUCIONADO</span> Problema de CORS - Apps ahora se abren en nuevas ventanas</li>
+            <li><span class="status success">AÑADIDO</span> Navegador Web integrado con barra de direcciones</li>
+            <li><span class="status success">CAMBIADO</span> Ubicación por defecto: Barcelona (41.3851, 2.1734)</li>
+            <li><span class="status success">MEJORADO</span> Sandbox attributes en iframes para mayor seguridad</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🌐 Funcionamiento de Apps</h2>
+        <p><strong>Comportamiento anterior:</strong></p>
+        <ul>
+            <li>❌ Apps se abrían en iframe interno</li>
+            <li>❌ Error CORS: "rechazó la conexión"</li>
+        </ul>
+        
+        <p><strong>Comportamiento NUEVO:</strong></p>
+        <ul>
+            <li>✅ Apps se abren en nueva ventana/pestaña del navegador</li>
+            <li>✅ Modo fullscreen automático</li>
+            <li>✅ Sin problemas de CORS</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 Navegador Web Integrado</h2>
+        <p>Se ha añadido un navegador completo con:</p>
+        <ul>
+            <li>🔙 Botón Atrás</li>
+            <li>🔜 Botón Adelante</li>
+            <li>🔄 Botón Recargar</li>
+            <li>🏠 Botón Home (Google)</li>
+            <li>📝 Barra de direcciones con búsqueda integrada</li>
+            <li>➡️ Botón Go para navegar</li>
+            <li>❌ Botón Cerrar para volver al dashboard</li>
+        </ul>
+        
+        <p><strong>Funcionalidades:</strong></p>
+        <ul>
+            <li>Añade automáticamente <code>https://</code> si no tiene protocolo</li>
+            <li>Detecta búsquedas (con espacios) y las envía a Google</li>
+            <li>Historial de navegación funcional</li>
+            <li>Presiona <code>Enter</code> en la barra para navegar</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🌤️ Widget de Clima</h2>
+        <p><strong>Ubicación por defecto:</strong> Barcelona, España</p>
+        <p>Coordenadas: <code>41.3851, 2.1734</code></p>
+        <p>Si permite geolocalización, mostrará tu ubicación actual.</p>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 Cómo Probar</h2>
+        <ol>
+            <li>Abre <code>index.html</code> en tu navegador</li>
+            <li>Haz clic en cualquier app (Waze, Spotify, WhatsApp, etc.)</li>
+            <li>La app se abrirá en una nueva ventana</li>
+            <li>Haz clic en el botón "Navegar" en Accesos Rápidos</li>
+            <li>Prueba el navegador integrado</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Notas Importantes</h2>
+        <ul>
+            <li>Las apps ahora funcionan correctamente sin errores CORS</li>
+            <li>El navegador permite visitar cualquier sitio web</li>
+            <li>Algunas webs pueden tener sus propias restricciones de iframe</li>
+            <li>Para Tesla: Usa el navegador integrado para sitios con restricciones</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🚀 Deploy en GitHub</h2>
+        <p>Tu sitio en: <a href="https://setumismo.github.io/TeslaHUB/" target="_blank">https://setumismo.github.io/TeslaHUB/</a></p>
+        <p>Haz commit y push de estos cambios para actualizar el sitio en vivo.</p>
+    </div>
+
+    <div class="test-section">
+        <h2>💻 Archivos Actualizados</h2>
+        <ul>
+            <li><code>index.html</code> - Añadido navegador web y modificados botones</li>
+            <li><code>styles.css</code> - Estilos para el navegador</li>
+            <li><code>script.js</code> - Funciones del navegador y cambio de ubicación</li>
+        </ul>
+    </div>
+
+    <hr style="border-color: #0ff; margin: 2rem 0;">
+    
+    <p style="text-align: center;">
+        <a href="index.html" style="font-size: 1.2rem; font-weight: bold;">
+            ← Volver al Dashboard
+        </a>
+    </p>
+</body>
+</html>

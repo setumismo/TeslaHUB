@@ -37,13 +37,13 @@ async function loadWeather() {
                 },
                 (error) => {
                     console.log('Error obteniendo ubicación:', error);
-                    // Ubicación por defecto (Madrid)
-                    fetchWeatherData(40.4168, -3.7038);
+                    // Ubicación por defecto (Barcelona)
+                    fetchWeatherData(41.3851, 2.1734);
                 }
             );
         } else {
-            // Ubicación por defecto si no hay geolocalización
-            fetchWeatherData(40.4168, -3.7038);
+            // Ubicación por defecto si no hay geolocalización (Barcelona)
+            fetchWeatherData(41.3851, 2.1734);
         }
     } catch (error) {
         console.error('Error loading weather:', error);
@@ -122,15 +122,8 @@ function showWeatherError() {
 
 // ===== NAVEGACIÓN DE APPS =====
 function openApp(url) {
-    const modal = document.getElementById('appModal');
-    const iframe = document.getElementById('appFrame');
-    
-    // Animación de apertura
-    iframe.src = url;
-    modal.classList.add('active');
-    
-    // Prevenir scroll en el body
-    document.body.style.overflow = 'hidden';
+    // Abrir en nueva ventana para evitar problemas de CORS
+    window.open(url, '_blank', 'fullscreen=yes,location=yes,menubar=no,toolbar=yes,status=yes,scrollbars=yes,resizable=yes');
 }
 
 function closeApp() {
@@ -148,6 +141,125 @@ function closeApp() {
     // Restaurar scroll
     document.body.style.overflow = 'auto';
 }
+
+// ===== NAVEGADOR WEB =====
+let browserHistory = [];
+let browserHistoryIndex = -1;
+
+function openBrowser() {
+    const modal = document.getElementById('browserModal');
+    const iframe = document.getElementById('browserFrame');
+    const urlBar = document.getElementById('urlBar');
+    
+    // Página de inicio
+    const homePage = 'https://www.google.com';
+    iframe.src = homePage;
+    urlBar.value = homePage;
+    
+    browserHistory = [homePage];
+    browserHistoryIndex = 0;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeBrowser() {
+    const modal = document.getElementById('browserModal');
+    const iframe = document.getElementById('browserFrame');
+    
+    modal.classList.remove('active');
+    
+    setTimeout(() => {
+        iframe.src = '';
+        browserHistory = [];
+        browserHistoryIndex = -1;
+    }, 400);
+    
+    document.body.style.overflow = 'auto';
+}
+
+function browserNavigate() {
+    const urlBar = document.getElementById('urlBar');
+    const iframe = document.getElementById('browserFrame');
+    let url = urlBar.value.trim();
+    
+    if (!url) return;
+    
+    // Si no tiene protocolo, añadir https://
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        // Verificar si es una búsqueda o URL
+        if (url.includes(' ') || !url.includes('.')) {
+            // Es una búsqueda
+            url = `https://www.google.com/search?q=${encodeURIComponent(url)}`;
+        } else {
+            // Es una URL
+            url = 'https://' + url;
+        }
+    }
+    
+    iframe.src = url;
+    
+    // Actualizar historial
+    browserHistoryIndex++;
+    browserHistory = browserHistory.slice(0, browserHistoryIndex);
+    browserHistory.push(url);
+    
+    urlBar.value = url;
+}
+
+function browserBack() {
+    if (browserHistoryIndex > 0) {
+        browserHistoryIndex--;
+        const iframe = document.getElementById('browserFrame');
+        const urlBar = document.getElementById('urlBar');
+        const url = browserHistory[browserHistoryIndex];
+        
+        iframe.src = url;
+        urlBar.value = url;
+    }
+}
+
+function browserForward() {
+    if (browserHistoryIndex < browserHistory.length - 1) {
+        browserHistoryIndex++;
+        const iframe = document.getElementById('browserFrame');
+        const urlBar = document.getElementById('urlBar');
+        const url = browserHistory[browserHistoryIndex];
+        
+        iframe.src = url;
+        urlBar.value = url;
+    }
+}
+
+function browserReload() {
+    const iframe = document.getElementById('browserFrame');
+    iframe.src = iframe.src;
+}
+
+function browserHome() {
+    const homePage = 'https://www.google.com';
+    const iframe = document.getElementById('browserFrame');
+    const urlBar = document.getElementById('urlBar');
+    
+    iframe.src = homePage;
+    urlBar.value = homePage;
+    
+    browserHistoryIndex++;
+    browserHistory = browserHistory.slice(0, browserHistoryIndex);
+    browserHistory.push(homePage);
+}
+
+// Permitir navegación con Enter en la barra de URL
+document.addEventListener('DOMContentLoaded', () => {
+    const urlBar = document.getElementById('urlBar');
+    if (urlBar) {
+        urlBar.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                browserNavigate();
+            }
+        });
+    }
+});
 
 // ===== PANTALLA COMPLETA =====
 function toggleFullscreen() {
@@ -327,6 +439,13 @@ if ('performance' in window) {
 window.TeslaDashboard = {
     openApp,
     closeApp,
+    openBrowser,
+    closeBrowser,
+    browserNavigate,
+    browserBack,
+    browserForward,
+    browserReload,
+    browserHome,
     toggleFullscreen,
     loadWeather,
     updateTime

@@ -68,13 +68,13 @@
                         <h2>Navegación</h2>
                     </div>
                     <div class="nav-options">
-                        <button class="nav-btn primary" onclick="openApp('https://waze.com/live-map')">
+                        <button class="nav-btn primary" onclick="openApp('https://waze.com/live-map', 'same-tab')">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                             </svg>
                             <span>Waze</span>
                         </button>
-                        <button class="nav-btn primary" onclick="openApp('https://www.google.com/maps')">
+                        <button class="nav-btn primary" onclick="openApp('https://www.google.com/maps', 'same-tab')">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
                             </svg>
@@ -90,7 +90,7 @@
                             <span>Tesla Navigator Avanzado</span>
                         </div>
                         <div class="bg-buttons">
-                            <button class="nav-btn boardinggate original" onclick="openApp('https://boardinggate.github.io/Tesla/tesla.html')">
+                            <button class="nav-btn boardinggate original" onclick="openApp('https://boardinggate.github.io/Tesla/tesla.html', 'new-tab')">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                     <polyline points="15 3 21 3 21 9"></polyline>
@@ -144,7 +144,7 @@
                         </div>
                     </div>
                     <div class="media-controls">
-                        <button class="control-btn" onclick="openApp('https://open.spotify.com')">
+                        <button class="control-btn" onclick="openApp('https://open.spotify.com', 'same-tab')">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
                             </svg>
@@ -258,11 +258,11 @@
                             </svg>
                             <span>Navegar</span>
                         </button>
-                        <button class="shortcut-btn" onclick="openApp('https://www.youtube.com')">
+                        <button class="shortcut-btn" onclick="openApp('https://music.youtube.com', 'same-tab')">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M23.5 6.5a3 3 0 0 0-2.1-2.1C19.5 4 12 4 12 4s-7.5 0-9.4.4A3 3 0 0 0 .5 6.5C0 8.4 0 12 0 12s0 3.6.5 5.5a3 3 0 0 0 2.1 2.1c1.9.4 9.4.4 9.4.4s7.5 0 9.4-.4a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.5.5-5.5s0-3.6-.5-5.5zM9.5 15.5v-7l6.3 3.5-6.3 3.5z"/>
                             </svg>
-                            <span>YouTube</span>
+                            <span>YouTube Music</span>
                         </button>
                         <button class="shortcut-btn" onclick="openApp('https://calendar.google.com')">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -298,6 +298,16 @@
             <iframe id="appFrame" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"></iframe>
         </div>
     </div>
+
+
+
+        <div id="popupFallbackToast" class="popup-fallback-toast" role="status" aria-live="polite">
+            <p>No se pudo abrir una nueva pestaña (popup bloqueado).</p>
+            <div class="popup-fallback-actions">
+                <button id="openHereFallbackBtn" class="popup-fallback-btn primary">Abrir aquí</button>
+                <button class="popup-fallback-btn" onclick="closePopupFallback()">Cerrar</button>
+            </div>
+        </div>
 
     <script src="script.js"></script>
 </body>

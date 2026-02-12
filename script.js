@@ -121,14 +121,48 @@ function showWeatherError() {
 }
 
 // ===== NAVEGACIÓN DE APPS =====
-function openApp(url) {
-    // Abrir en nueva ventana para evitar problemas de CORS
-    window.open(url, '_blank', 'fullscreen=yes,location=yes,menubar=no,toolbar=yes,status=yes,scrollbars=yes,resizable=yes');
+function openApp(url, mode = 'same-tab') {
+    if (mode === 'new-tab') {
+        const newWindow = window.open(
+            url,
+            '_blank',
+            'noopener,noreferrer,fullscreen=yes,location=yes,menubar=no,toolbar=yes,status=yes,scrollbars=yes,resizable=yes'
+        );
+
+        if (!newWindow) {
+            showPopupBlockedToast(url);
+        }
+        return;
+    }
+
+    window.location.href = url;
 }
 
 function openLocalNavigator() {
     // Abrir el navegador local integrado
-    window.open('navigator.html', '_blank', 'fullscreen=yes,location=yes,menubar=no,toolbar=yes,status=yes,scrollbars=yes,resizable=yes');
+    openApp('navigator.html', 'new-tab');
+}
+
+function showPopupBlockedToast(url) {
+    const popupFallback = document.getElementById('popupFallbackToast');
+    if (!popupFallback) {
+        window.location.href = url;
+        return;
+    }
+
+    popupFallback.classList.add('visible');
+
+    const openHereButton = document.getElementById('openHereFallbackBtn');
+    if (openHereButton) {
+        openHereButton.onclick = () => openApp(url, 'same-tab');
+    }
+}
+
+function closePopupFallback() {
+    const popupFallback = document.getElementById('popupFallbackToast');
+    if (popupFallback) {
+        popupFallback.classList.remove('visible');
+    }
 }
 
 function closeApp() {

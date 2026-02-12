@@ -739,3 +739,56 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-secondary);
 }
+
+/* ===== POPUP FALLBACK ===== */
+.popup-fallback-toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    width: min(92vw, 560px);
+    background: rgba(8, 8, 8, 0.96);
+    border: 1px solid rgba(255, 51, 102, 0.55);
+    border-radius: 0.9rem;
+    padding: 0.9rem 1rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+    z-index: 1200;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.popup-fallback-toast.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.popup-fallback-toast p {
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.popup-fallback-actions {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: flex-end;
+}
+
+.popup-fallback-btn {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: transparent;
+    color: var(--text-primary);
+    border-radius: 0.55rem;
+    padding: 0.45rem 0.8rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.popup-fallback-btn.primary {
+    border-color: rgba(0, 255, 255, 0.5);
+    color: var(--accent-primary);
+}

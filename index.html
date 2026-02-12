@@ -55,60 +55,61 @@
             </div>
         </header>
 
-        <!-- Grid principal -->
-        <main class="dashboard-grid">
-            <!-- Navegación - Área grande -->
-            <section class="grid-item navigation-hub" data-app="navigation">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
-                        </svg>
-                        <h2>Navegación</h2>
-                    </div>
-                    <div class="nav-options">
-                        <button class="nav-btn primary" onclick="openApp('https://waze.com/live-map')">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                            </svg>
-                            <span>Waze</span>
-                        </button>
-                        <button class="nav-btn primary" onclick="openApp('https://www.google.com/maps')">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                            </svg>
-                            <span>Google Maps</span>
-                        </button>
-                    </div>
-                    <form class="route-form" onsubmit="event.preventDefault(); handleRouteSubmit();">
-                        <div class="route-form-row">
-                            <input type="text" id="routeOrigin" placeholder="Origen" required>
-                            <input type="text" id="routeDestination" placeholder="Destino" required>
-                        </div>
-                        <button type="submit" class="route-submit-btn">Abrir ruta en Google Maps</button>
-                    </form>
-                    <div class="boardinggate-section">
-                        <div class="bg-label">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            <span>Tesla Navigator Avanzado</span>
-                        </div>
-                        <div class="bg-buttons">
-                            <button class="nav-btn boardinggate original" onclick="openApp('https://boardinggate.github.io/Tesla/tesla.html')">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15 3 21 3 21 9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                                <span>BoardingGate Original</span>
-                            </button>
-                            <button class="nav-btn boardinggate local" onclick="openLocalNavigator()">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        <!-- Layout estilo CarPlay -->
+        <main class="dashboard-grid carplay-layout">
+            <aside class="app-sidebar" aria-label="Apps principales">
+                <button class="sidebar-app active" data-target="navigation" data-app="navigation">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                    </svg>
+                    <span>Nav</span>
+                </button>
+                <button class="sidebar-app" data-target="media" data-app="media">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2v20M2 12h20" opacity="0"></path>
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                        <circle cx="12" cy="12" r="4"></circle>
+                    </svg>
+                    <span>Music</span>
+                </button>
+                <button class="sidebar-app" data-target="telegram" data-app="telegram">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.05 2.01L2.95 9c-1.23.5-1.22 1.2-.22 1.51l4.64 1.45 1.79 5.39c.22.6.11.83.74.83.49 0 .71-.22.99-.49l2.23-2.17 4.64 3.43c.86.47 1.47.23 1.68-.8l3.08-14.5c.31-1.27-.49-1.85-1.47-1.4z"/>
+                    </svg>
+                    <span>Chat</span>
+                </button>
+                <button class="sidebar-app" data-target="whatsapp" data-app="whatsapp">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                    </svg>
+                    <span>WA</span>
+                </button>
+                <button class="sidebar-app" data-target="weather" data-app="weather">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                    </svg>
+                    <span>Clima</span>
+                </button>
+                <button class="sidebar-app" data-target="shortcuts" data-app="shortcuts">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Apps</span>
+                </button>
+            </aside>
+
+            <section class="content-panel">
+                <div class="content-grid">
+                    <!-- Navegación - Área grande -->
+                    <section class="grid-item navigation-hub" data-app="navigation">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
                                 </svg>
                                 <h2>Navegación</h2>
                             </div>
@@ -126,6 +127,13 @@
                                     <span>Google Maps</span>
                                 </button>
                             </div>
+                            <form class="route-form" onsubmit="event.preventDefault(); handleRouteSubmit();">
+                                <div class="route-form-row">
+                                    <input type="text" id="routeOrigin" placeholder="Origen" required>
+                                    <input type="text" id="routeDestination" placeholder="Destino" required>
+                                </div>
+                                <button type="submit" class="route-submit-btn">Abrir ruta en Google Maps</button>
+                            </form>
                             <div class="boardinggate-section">
                                 <div class="bg-label">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

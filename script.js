@@ -156,6 +156,27 @@ function openLocalNavigator() {
     openAppByKey('localNavigator');
 }
 
+
+function openGoogleMapsRoute(origin, destination) {
+    const cleanOrigin = origin?.trim();
+    const cleanDestination = destination?.trim();
+
+    if (!cleanOrigin || !cleanDestination) {
+        alert('Introduce origen y destino para abrir la ruta');
+        return;
+    }
+
+    const routeUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(cleanOrigin)}&destination=${encodeURIComponent(cleanDestination)}&travelmode=driving`;
+    openApp(routeUrl);
+}
+
+function handleRouteSubmit() {
+    const originInput = document.getElementById('routeOrigin');
+    const destinationInput = document.getElementById('routeDestination');
+
+    openGoogleMapsRoute(originInput.value, destinationInput.value);
+}
+
 function closeApp() {
     const modal = document.getElementById('appModal');
     const iframe = document.getElementById('appFrame');
@@ -234,6 +255,7 @@ function initializeDashboard() {
     
     // Animación de entrada para las cards
     animateCardsOnLoad();
+    initializeSidebarFocus();
     
     // Wake lock para evitar que la pantalla se apague
     requestWakeLock();
@@ -241,6 +263,24 @@ function initializeDashboard() {
     console.log('✅ Dashboard inicializado correctamente');
 }
 
+
+function initializeSidebarFocus() {
+    const sidebarButtons = document.querySelectorAll('.sidebar-app');
+    if (!sidebarButtons.length) return;
+
+    sidebarButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            sidebarButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const target = button.dataset.target;
+            const targetCard = document.querySelector(`.grid-item[data-app="${target}"]`);
+            if (targetCard) {
+                targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+            }
+        });
+    });
+}
 // ===== ANIMACIONES =====
 function animateCardsOnLoad() {
     const cards = document.querySelectorAll('.grid-item');

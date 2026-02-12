@@ -321,6 +321,14 @@
                     </svg>
                     Calcular Ruta
                 </button>
+                <button class="nav-btn" onclick="exportRoute()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Exportar Ruta
+                </button>
                 <button class="nav-btn" onclick="window.close()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -424,6 +432,7 @@
         let waypoints = [];
         let markers = [];
         let routeLine = null;
+        let currentRoute = null;
 
         // Añadir parada
         function addWaypoint() {
@@ -517,10 +526,43 @@
                 // Simular cargadores cercanos
                 addChargers(originCoords, destCoords);
 
+                currentRoute = { origin, destination };
+
             } catch (error) {
                 console.error('Error calculando ruta:', error);
                 alert('Error al calcular la ruta. Por favor, verifica las direcciones.');
             }
+        }
+
+
+        function exportRoute() {
+            const origin = document.getElementById('origin').value.trim();
+            const destination = document.getElementById('destination').value.trim();
+            const route = currentRoute || (origin && destination ? { origin, destination } : null);
+
+            if (!route) {
+                alert('Calcula una ruta o completa origen/destino antes de exportar.');
+                return;
+            }
+
+            const selectedApp = prompt('Exportar a: escribe "google" o "waze"', 'google');
+            if (!selectedApp) {
+                return;
+            }
+
+            const app = selectedApp.trim().toLowerCase();
+            let exportUrl = '';
+
+            if (app === 'waze') {
+                exportUrl = `https://www.waze.com/ul?q=${encodeURIComponent(route.destination)}&navigate=yes`;
+            } else if (app === 'google') {
+                exportUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(route.origin)}&destination=${encodeURIComponent(route.destination)}&travelmode=driving`;
+            } else {
+                alert('Opción no válida. Usa "google" o "waze".');
+                return;
+            }
+
+            window.open(exportUrl, '_blank', 'fullscreen=yes,location=yes,menubar=no,toolbar=yes,status=yes,scrollbars=yes,resizable=yes');
         }
 
         // Geocoding simple
@@ -574,6 +616,7 @@
             document.getElementById('totalDistance').textContent = '--';
             document.getElementById('totalTime').textContent = '--';
             document.getElementById('chargers').textContent = '0';
+            currentRoute = null;
             
             map.setView([41.3851, 2.1734], 6);
         }

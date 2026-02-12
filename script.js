@@ -131,6 +131,27 @@ function openLocalNavigator() {
     window.open('navigator.html', '_blank', 'fullscreen=yes,location=yes,menubar=no,toolbar=yes,status=yes,scrollbars=yes,resizable=yes');
 }
 
+
+function openGoogleMapsRoute(origin, destination) {
+    const cleanOrigin = origin?.trim();
+    const cleanDestination = destination?.trim();
+
+    if (!cleanOrigin || !cleanDestination) {
+        alert('Introduce origen y destino para abrir la ruta');
+        return;
+    }
+
+    const routeUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(cleanOrigin)}&destination=${encodeURIComponent(cleanDestination)}&travelmode=driving`;
+    openApp(routeUrl);
+}
+
+function handleRouteSubmit() {
+    const originInput = document.getElementById('routeOrigin');
+    const destinationInput = document.getElementById('routeDestination');
+
+    openGoogleMapsRoute(originInput.value, destinationInput.value);
+}
+
 function closeApp() {
     const modal = document.getElementById('appModal');
     const iframe = document.getElementById('appFrame');

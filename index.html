@@ -110,183 +110,173 @@
                                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                 </svg>
-                                <span>Navigator Local</span>
+                                <h2>Navegación</h2>
+                            </div>
+                            <div class="nav-options">
+                                <button class="nav-btn primary" onclick="openApp('https://waze.com/live-map')">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+                                    <span>Waze</span>
+                                </button>
+                                <button class="nav-btn primary" onclick="openApp('https://www.google.com/maps')">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                                    </svg>
+                                    <span>Google Maps</span>
+                                </button>
+                            </div>
+                            <div class="boardinggate-section">
+                                <div class="bg-label">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    <span>Tesla Navigator Avanzado</span>
+                                </div>
+                                <div class="bg-buttons">
+                                    <button class="nav-btn boardinggate original" onclick="openApp('https://boardinggate.github.io/Tesla/tesla.html')">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                            <polyline points="15 3 21 3 21 9"></polyline>
+                                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        </svg>
+                                        <span>BoardingGate Original</span>
+                                    </button>
+                                    <button class="nav-btn boardinggate local" onclick="openLocalNavigator()">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M3 3h18v18H3z"></path>
+                                            <path d="M8 12l3 3 5-5"></path>
+                                        </svg>
+                                        <span>Navegador Local</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Spotify -->
+                    <section class="grid-item media-hub" data-app="media">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M8 10.5c2.5-1 5.5-.9 8 .3M8.5 13.5c2-0.6 4.3-0.5 6.3.4M9.2 16c1.5-.4 3-.3 4.2.4" stroke="#111" stroke-width="1.6" stroke-linecap="round" fill="none"></path>
+                                </svg>
+                                <h2>Spotify</h2>
+                            </div>
+                            <div class="media-display">
+                                <div class="now-playing">
+                                    <div class="album-art">
+                                        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="track-info">
+                                        <p class="track-title">Conduce con ritmo</p>
+                                        <p class="track-artist">Inicia tu playlist favorita</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media-controls">
+                                <button class="control-btn" onclick="openApp('https://open.spotify.com')">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Telegram -->
+                    <section class="grid-item messaging-hub telegram" data-app="telegram">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M21.5 2.5L2.8 10.1c-1.2.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.1.8.7.8.5 0 .7-.2 1-.5l2.4-2.3 5 3.7c.9.5 1.5.2 1.7-.8l3.2-15c.3-1.3-.5-1.9-1.5-1.4z"></path>
+                                </svg>
+                                <h2>Telegram</h2>
+                            </div>
+                            <button class="app-launch-btn" onclick="openApp('https://web.telegram.org')">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                                <span>Abrir mensajes</span>
+                            </button>
+                            <div class="quick-info"><div class="info-badge"><span>Mensajería segura</span></div></div>
+                        </div>
+                    </section>
+
+                    <!-- WhatsApp -->
+                    <section class="grid-item messaging-hub whatsapp" data-app="whatsapp">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                                </svg>
+                                <h2>WhatsApp</h2>
+                            </div>
+                            <button class="app-launch-btn" onclick="openApp('https://web.whatsapp.com')">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                                <span>Abrir chats</span>
+                            </button>
+                            <div class="quick-info"><div class="info-badge"><span>Mensajes instantáneos</span></div></div>
+                        </div>
+                    </section>
+
+                    <!-- Clima -->
+                    <section class="grid-item weather-widget" data-app="weather">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <svg class="card-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                                </svg>
+                                <h2>Clima</h2>
+                            </div>
+                            <div class="weather-display">
+                                <div class="temp-main"><span class="temp-value" id="temperature">--°</span></div>
+                                <div class="weather-details">
+                                    <p class="weather-condition" id="condition">Cargando...</p>
+                                    <p class="weather-location" id="location">---</p>
+                                </div>
+                            </div>
+                            <button class="weather-refresh" onclick="loadWeather()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="23 4 23 10 17 10"></polyline>
+                                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                                </svg>
                             </button>
                         </div>
-                    </div>
-                    <div class="quick-info">
-                        <div class="info-badge">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            <span>Navegación en tiempo real</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    </section>
 
-            <!-- Spotify -->
-            <section class="grid-item media-hub" data-app="spotify">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 14.5c-.2.3-.5.4-.8.4-.2 0-.3 0-.5-.1-2.5-1.5-5.6-1.8-9.2-1-.4.1-.8-.2-.9-.6-.1-.4.2-.8.6-.9 4-.9 7.5-.5 10.4 1.2.4.2.5.7.4 1zm1.1-2.7c-.2.4-.7.5-1.1.3-2.8-1.7-7.1-2.2-10.4-1.2-.5.1-1-.1-1.1-.6-.1-.5.1-1 .6-1.1 3.8-1.1 8.6-.6 11.8 1.4.4.2.6.7.2 1.2zm.1-2.8C13.3 9 7.7 8.8 4.5 9.8c-.6.2-1.2-.2-1.4-.8-.2-.6.2-1.2.8-1.4 3.7-1.1 10-1 14.4 1.4.5.3.7 1 .4 1.5-.3.5-1 .7-1.5.4z"/>
-                        </svg>
-                        <h2>Spotify</h2>
-                    </div>
-                    <div class="media-display">
-                        <div class="now-playing">
-                            <div class="album-art">
-                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <circle cx="12" cy="12" r="3"></circle>
+                    <!-- Accesos rápidos -->
+                    <section class="grid-item quick-access" data-app="shortcuts">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <svg class="card-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="14" width="7" height="7"></rect>
+                                    <rect x="3" y="14" width="7" height="7"></rect>
                                 </svg>
+                                <h2>Accesos</h2>
                             </div>
-                            <div class="track-info">
-                                <p class="track-title">Abre Spotify Web</p>
-                                <p class="track-artist">Toca para reproducir</p>
+                            <div class="shortcuts-grid">
+                                <button class="shortcut-btn" onclick="openApp('https://www.google.com')"><span>Navegar</span></button>
+                                <button class="shortcut-btn" onclick="openApp('https://www.youtube.com')"><span>YouTube</span></button>
+                                <button class="shortcut-btn" onclick="openApp('https://calendar.google.com')"><span>Agenda</span></button>
+                                <button class="shortcut-btn" onclick="toggleFullscreen()"><span>Pantalla</span></button>
                             </div>
                         </div>
-                    </div>
-                    <div class="media-controls">
-                        <button class="control-btn" onclick="openApp('https://open.spotify.com')">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Telegram -->
-            <section class="grid-item messaging-hub telegram" data-app="telegram">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.67-.52.36-.99.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.74 4-1.74 6.68-2.88 8.03-3.44 3.82-1.59 4.62-1.87 5.14-1.88.11 0 .37.03.54.17.14.11.18.26.2.37.01.06.03.24.01.38z"/>
-                        </svg>
-                        <h2>Telegram</h2>
-                    </div>
-                    <button class="app-launch-btn" onclick="openApp('https://web.telegram.org')">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 2l-2 20-7-4-4 4V18l10-10-8 6-5-3z"></path>
-                        </svg>
-                        <span>Abrir mensajes</span>
-                    </button>
-                    <div class="quick-info">
-                        <div class="info-badge">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="M12 6v6l4 2" stroke="#000" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                            <span>Mensajería segura</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- WhatsApp -->
-            <section class="grid-item messaging-hub whatsapp" data-app="whatsapp">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.188 8.188 0 01-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.86-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.39.11-.5.11-.11.27-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.11-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01z"/>
-                        </svg>
-                        <h2>WhatsApp</h2>
-                    </div>
-                    <button class="app-launch-btn" onclick="openApp('https://web.whatsapp.com')">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
-                        <span>Abrir chats</span>
-                    </button>
-                    <div class="quick-info">
-                        <div class="info-badge">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-                            </svg>
-                            <span>Mensajes instantáneos</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Clima -->
-            <section class="grid-item weather-widget" data-app="weather">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <svg class="card-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
-                        </svg>
-                        <h2>Clima</h2>
-                    </div>
-                    <div class="weather-display">
-                        <div class="temp-main">
-                            <span class="temp-value" id="temperature">--°</span>
-                        </div>
-                        <div class="weather-details">
-                            <p class="weather-condition" id="condition">Cargando...</p>
-                            <p class="weather-location" id="location">---</p>
-                        </div>
-                    </div>
-                    <button class="weather-refresh" onclick="loadWeather()">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="23 4 23 10 17 10"></polyline>
-                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                        </svg>
-                    </button>
-                </div>
-            </section>
-
-            <!-- Accesos rápidos -->
-            <section class="grid-item quick-access" data-app="shortcuts">
-                <div class="card-glow"></div>
-                <div class="card-content">
-                    <div class="card-header">
-                        <svg class="card-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="7" height="7"></rect>
-                            <rect x="14" y="3" width="7" height="7"></rect>
-                            <rect x="14" y="14" width="7" height="7"></rect>
-                            <rect x="3" y="14" width="7" height="7"></rect>
-                        </svg>
-                        <h2>Accesos</h2>
-                    </div>
-                    <div class="shortcuts-grid">
-                        <button class="shortcut-btn" onclick="openApp('https://www.google.com')">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="2" y1="12" x2="22" y2="12"></line>
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                            </svg>
-                            <span>Navegar</span>
-                        </button>
-                        <button class="shortcut-btn" onclick="openApp('https://www.youtube.com')">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M23.5 6.5a3 3 0 0 0-2.1-2.1C19.5 4 12 4 12 4s-7.5 0-9.4.4A3 3 0 0 0 .5 6.5C0 8.4 0 12 0 12s0 3.6.5 5.5a3 3 0 0 0 2.1 2.1c1.9.4 9.4.4 9.4.4s7.5 0 9.4-.4a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.5.5-5.5s0-3.6-.5-5.5zM9.5 15.5v-7l6.3 3.5-6.3 3.5z"/>
-                            </svg>
-                            <span>YouTube</span>
-                        </button>
-                        <button class="shortcut-btn" onclick="openApp('https://calendar.google.com')">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                            </svg>
-                            <span>Agenda</span>
-                        </button>
-                        <button class="shortcut-btn" onclick="toggleFullscreen()">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-                            </svg>
-                            <span>Pantalla</span>
-                        </button>
-                    </div>
+                    </section>
                 </div>
             </section>
         </main>

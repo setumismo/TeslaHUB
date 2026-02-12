@@ -1,34 +1,22 @@
 :root {
-    /* Color Palette - Automotive Premium */
-    --bg-primary: #000000;
-    --bg-secondary: #0a0a0a;
-    --bg-card: #111111;
-    --bg-card-hover: #1a1a1a;
-    
-    /* Neon Accents */
-    --accent-primary: #00ffff;
-    --accent-secondary: #ff00ff;
-    --accent-tertiary: #00ff88;
-    --accent-red: #ff3366;
-    --accent-blue: #3366ff;
-    
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, #00ffff 0%, #0099ff 100%);
-    --gradient-secondary: linear-gradient(135deg, #ff00ff 0%, #ff0066 100%);
-    --gradient-tertiary: linear-gradient(135deg, #00ff88 0%, #00cc99 100%);
-    
-    /* Text */
-    --text-primary: #ffffff;
-    --text-secondary: #999999;
-    --text-tertiary: #666666;
-    
-    /* Glow Effects */
-    --glow-primary: 0 0 20px rgba(0, 255, 255, 0.5),
-                     0 0 40px rgba(0, 255, 255, 0.3),
-                     0 0 60px rgba(0, 255, 255, 0.1);
-    --glow-secondary: 0 0 20px rgba(255, 0, 255, 0.5),
-                       0 0 40px rgba(255, 0, 255, 0.3);
-    --glow-tertiary: 0 0 20px rgba(0, 255, 136, 0.5);
+    --bg-primary: #0f1115;
+    --bg-secondary: #181b22;
+    --bg-surface: #1e232d;
+    --bg-surface-hover: #252b36;
+    --bg-sidebar: #141821;
+    --text-primary: #f4f7ff;
+    --text-secondary: #9ca5b5;
+    --text-muted: #788296;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.3);
+
+    --accent-navigation: #4f8cff;
+    --accent-media: #1db954;
+    --accent-telegram: #2aabee;
+    --accent-whatsapp: #41c87a;
+    --accent-weather: #f4b740;
+    --accent-shortcuts: #b28dff;
 }
 
 * {
@@ -46,8 +34,6 @@ body {
     width: 100vw;
     height: 100vh;
     position: fixed;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .dashboard-container {
@@ -55,20 +41,13 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    position: relative;
-    background: 
-        radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.05) 0%, transparent 50%),
-        var(--bg-primary);
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 45%), var(--bg-primary);
 }
 
-/* ===== HEADER ===== */
 .dashboard-header {
-    padding: 1.5rem 2rem 1rem;
-    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
-    backdrop-filter: blur(10px);
-    z-index: 100;
+    padding: 1.1rem 2rem 0.9rem;
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(15, 17, 21, 0.95);
 }
 
 .status-bar {
@@ -79,200 +58,204 @@ body {
 
 .time-display {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    align-items: baseline;
+    gap: 1rem;
 }
 
 #currentTime {
     font-family: 'Orbitron', monospace;
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 2.8vw, 2.8rem);
     font-weight: 700;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: 0.05em;
-    text-shadow: var(--glow-primary);
+    color: var(--text-primary);
+    letter-spacing: 0.04em;
 }
 
 .date-small {
-    font-size: 0.95rem;
     color: var(--text-secondary);
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
 }
 
 .status-indicators {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.2rem;
     align-items: center;
 }
 
 .indicator {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--accent-primary);
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.indicator svg {
-    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
-}
-
-.battery-level {
-    font-family: 'Orbitron', monospace;
+    gap: 0.45rem;
+    color: var(--text-secondary);
     font-weight: 600;
 }
 
-/* ===== MAIN GRID ===== */
-.dashboard-grid {
+.dashboard-grid.carplay-layout {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 1.5rem;
-    padding: 1.5rem 2rem 2rem;
-    overflow: hidden;
+    grid-template-columns: 5.8rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1rem 1.1rem 1.1rem;
+    min-height: 0;
 }
 
-/* Grid Layout */
-.navigation-hub {
-    grid-column: 1 / 4;
-    grid-row: 1 / 3;
+.app-sidebar {
+    background: var(--bg-sidebar);
+    border: 1px solid var(--border-subtle);
+    border-radius: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.65rem 0.45rem;
+    gap: 0.55rem;
 }
 
-.media-hub {
-    grid-column: 4 / 7;
-    grid-row: 1 / 3;
+.sidebar-app {
+    width: 100%;
+    border: none;
+    border-radius: 1.1rem;
+    background: transparent;
+    color: var(--text-secondary);
+    min-height: 4.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
-.messaging-hub.telegram {
-    grid-column: 1 / 3;
-    grid-row: 3 / 4;
+.sidebar-app:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
 }
 
-.messaging-hub.whatsapp {
-    grid-column: 3 / 5;
-    grid-row: 3 / 4;
+.sidebar-app:active,
+.sidebar-app.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+    transform: scale(0.98);
 }
 
-.weather-widget {
-    grid-column: 5 / 6;
-    grid-row: 3 / 4;
+.content-panel {
+    background: rgba(20, 24, 32, 0.78);
+    border: 1px solid var(--border-subtle);
+    border-radius: 1.8rem;
+    padding: 0.95rem;
+    min-height: 0;
 }
 
-.quick-access {
-    grid-column: 6 / 7;
-    grid-row: 3 / 4;
+.content-grid {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: 0.95rem;
 }
 
-/* ===== CARDS ===== */
+.navigation-hub { grid-column: 1 / 7; grid-row: 1 / 3; }
+.media-hub { grid-column: 7 / 13; grid-row: 1 / 3; }
+.messaging-hub.telegram { grid-column: 1 / 4; grid-row: 3 / 4; }
+.messaging-hub.whatsapp { grid-column: 4 / 7; grid-row: 3 / 4; }
+.weather-widget { grid-column: 7 / 10; grid-row: 3 / 4; }
+.quick-access { grid-column: 10 / 13; grid-row: 3 / 4; }
+
 .grid-item {
     position: relative;
-    background: var(--bg-card);
-    border-radius: 1.5rem;
+    background: var(--bg-surface);
+    border-radius: 1.45rem;
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-soft);
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .grid-item:hover {
-    transform: translateY(-4px);
-    border-color: rgba(0, 255, 255, 0.3);
+    transform: translateY(-2px);
+    background: var(--bg-surface-hover);
+    border-color: var(--border-strong);
 }
 
-.grid-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        var(--accent-primary) 50%, 
-        transparent 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.grid-item:hover::before {
-    opacity: 0.6;
+.grid-item:active {
+    transform: translateY(0);
 }
 
 .card-glow {
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    pointer-events: none;
-}
-
-.grid-item:hover .card-glow {
-    opacity: 1;
+    display: none;
 }
 
 .card-content {
     height: 100%;
-    padding: 2rem;
+    padding: 1.15rem;
     display: flex;
     flex-direction: column;
-    position: relative;
-    z-index: 1;
+    gap: 0.7rem;
 }
 
 .card-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 0.7rem;
 }
 
-.card-icon {
-    color: var(--accent-primary);
-    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
-}
+.card-icon { color: var(--text-secondary); }
 
 .card-header h2 {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    letter-spacing: 0.04em;
 }
 
-/* ===== NAVIGATION HUB ===== */
-.nav-options {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+.navigation-hub .card-icon,
+.navigation-hub .card-header h2 { color: var(--accent-navigation); }
+.media-hub .card-icon,
+.media-hub .card-header h2 { color: var(--accent-media); }
+.telegram .card-icon,
+.telegram .card-header h2 { color: var(--accent-telegram); }
+.whatsapp .card-icon,
+.whatsapp .card-header h2 { color: var(--accent-whatsapp); }
+.weather-widget .card-icon,
+.weather-widget .card-header h2,
+.temp-value { color: var(--accent-weather); }
+.quick-access .card-icon,
+.quick-access .card-header h2 { color: var(--accent-shortcuts); }
+
+.nav-options,
+.bg-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }
+
+.nav-btn,
+.app-launch-btn,
+.weather-refresh,
+.shortcut-btn {
+    border: 1px solid var(--border-subtle);
+    border-radius: 1rem;
+    background: #151922;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
 }
+
+.nav-btn:hover,
+.app-launch-btn:hover,
+.weather-refresh:hover,
+.shortcut-btn:hover {
+    background: #202633;
+    border-color: var(--border-strong);
+}
+
+.nav-btn:active,
+.app-launch-btn:active,
+.weather-refresh:active,
+.shortcut-btn:active { transform: scale(0.98); }
 
 .nav-btn {
-    flex: 1;
-    height: 7rem;
-    background: var(--bg-secondary);
-    border: 2px solid rgba(0, 255, 255, 0.2);
-    border-radius: 1rem;
-    color: var(--text-primary);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    cursor: pointer;
+    min-height: 5rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     gap: 0.75rem;
     transition: all 0.3s ease;
@@ -370,244 +353,69 @@ body {
 .info-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1rem;
-    background: rgba(0, 255, 255, 0.1);
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    border-radius: 2rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--accent-primary);
+    gap: 0.45rem;
+    font-size: 1rem;
 }
 
-.info-badge svg {
-    filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.4));
-}
-
-/* ===== BOARDINGGATE SECTION IN NAVIGATION ===== */
 .boardinggate-section {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 107, 53, 0.2);
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-subtle);
 }
 
 .bg-label {
+    margin-bottom: 0.65rem;
     display: flex;
+    gap: 0.45rem;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    color: #ff6b35;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-}
-
-.bg-label svg {
-    filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.5));
-}
-
-.bg-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
-
-.nav-btn.boardinggate {
-    height: 6rem;
-    background: var(--bg-secondary);
-    flex-direction: column;
-    font-size: 0.95rem;
-}
-
-.nav-btn.boardinggate.original {
-    border-color: rgba(255, 107, 53, 0.3);
-}
-
-.nav-btn.boardinggate.original:hover {
-    background: rgba(255, 107, 53, 0.1);
-    border-color: #ff6b35;
-    box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
-}
-
-.nav-btn.boardinggate.original svg {
-    color: #ff6b35;
-    filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.4));
-}
-
-.nav-btn.boardinggate.local {
-    border-color: rgba(0, 255, 136, 0.3);
-}
-
-.nav-btn.boardinggate.local:hover {
-    background: rgba(0, 255, 136, 0.1);
-    border-color: var(--accent-tertiary);
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
-}
-
-.nav-btn.boardinggate.local svg {
-    color: var(--accent-tertiary);
-    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.4));
-}
-
-/* ===== MEDIA HUB (Spotify) ===== */
-.media-hub .card-icon {
-    color: #1DB954;
-    filter: drop-shadow(0 0 10px rgba(29, 185, 84, 0.5));
-}
-
-.media-hub .card-header h2 {
-    background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.media-display {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.now-playing {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    width: 100%;
-}
-
-.album-art {
-    width: 5.5rem;
-    height: 5.5rem;
-    background: var(--bg-secondary);
-    border: 2px solid rgba(29, 185, 84, 0.3);
-    border-radius: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1DB954;
-}
-
-.track-info {
-    flex: 1;
-}
-
-.track-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary);
-}
-
-.track-artist {
-    font-size: 1rem;
     color: var(--text-secondary);
+    font-size: 0.9rem;
 }
 
-.media-controls {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-}
+.nav-btn.boardinggate { min-height: 4.2rem; font-size: 0.84rem; }
 
+.media-display { flex: 1; display: flex; align-items: center; }
+.now-playing { display: flex; align-items: center; gap: 0.95rem; width: 100%; }
+.album-art {
+    width: 4.6rem;
+    height: 4.6rem;
+    border-radius: 1rem;
+    background: #151922;
+    border: 1px solid var(--border-subtle);
+    display: grid;
+    place-items: center;
+}
+.track-title { font-size: 1.15rem; font-weight: 700; }
+.track-artist { color: var(--text-secondary); }
+.media-controls { display: flex; justify-content: center; }
 .control-btn {
-    width: 5rem;
-    height: 5rem;
-    background: #1DB954;
+    width: 4rem;
+    height: 4rem;
     border: none;
     border-radius: 50%;
-    color: #000;
+    background: var(--accent-media);
+    color: #05150a;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
-}
-
-.control-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(29, 185, 84, 0.6);
-}
-
-.control-btn:active {
-    transform: scale(0.95);
-}
-
-/* ===== MESSAGING HUBS ===== */
-.telegram .card-icon {
-    color: #0088cc;
-    filter: drop-shadow(0 0 10px rgba(0, 136, 204, 0.5));
-}
-
-.telegram .card-header h2 {
-    background: linear-gradient(135deg, #0088cc 0%, #00aaff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.whatsapp .card-icon {
-    color: #25D366;
-    filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.5));
-}
-
-.whatsapp .card-header h2 {
-    background: linear-gradient(135deg, #25D366 0%, #2ee86f 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .app-launch-btn {
     width: 100%;
-    height: 5.5rem;
-    background: var(--bg-secondary);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    color: var(--text-primary);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
+    min-height: 4.2rem;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    transition: all 0.3s ease;
-    margin-bottom: 1rem;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.4rem;
 }
 
-.telegram .app-launch-btn {
-    border-color: rgba(0, 136, 204, 0.3);
-}
-
-.telegram .app-launch-btn:hover {
-    background: rgba(0, 136, 204, 0.1);
-    border-color: #0088cc;
-    box-shadow: 0 0 20px rgba(0, 136, 204, 0.3);
-    transform: translateY(-2px);
-}
-
-.whatsapp .app-launch-btn {
-    border-color: rgba(37, 211, 102, 0.3);
-}
-
-.whatsapp .app-launch-btn:hover {
-    background: rgba(37, 211, 102, 0.1);
-    border-color: #25D366;
-    box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
-    transform: translateY(-2px);
-}
-
-/* ===== WEATHER WIDGET ===== */
-.weather-widget .card-icon {
-    color: #FFB74D;
-    filter: drop-shadow(0 0 10px rgba(255, 183, 77, 0.5));
-}
-
-.weather-widget .card-header h2 {
-    background: linear-gradient(135deg, #FFB74D 0%, #FFA726 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.quick-info { margin-top: auto; }
+.info-badge {
+    display: inline-flex;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--text-secondary);
+    font-size: 0.84rem;
 }
 
 .weather-display {
@@ -615,139 +423,67 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     text-align: center;
-}
-
-.temp-main {
-    margin-bottom: 1rem;
 }
 
 .temp-value {
     font-family: 'Orbitron', monospace;
-    font-size: 3rem;
+    font-size: clamp(2rem, 3.2vw, 2.9rem);
     font-weight: 700;
-    background: linear-gradient(135deg, #FFB74D 0%, #FFA726 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
-.weather-condition {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-primary);
-}
+.weather-condition { font-size: 1rem; margin-top: 0.35rem; }
+.weather-location { color: var(--text-secondary); font-size: 0.9rem; }
+.weather-refresh { min-height: 2.9rem; display: grid; place-items: center; }
 
-.weather-location {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
-
-.weather-refresh {
-    width: 100%;
-    height: 3rem;
-    background: rgba(255, 183, 77, 0.1);
-    border: 1px solid rgba(255, 183, 77, 0.3);
-    border-radius: 0.75rem;
-    color: #FFB74D;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.weather-refresh:hover {
-    background: rgba(255, 183, 77, 0.2);
-    border-color: #FFB74D;
-    transform: translateY(-2px);
-}
-
-.weather-refresh svg {
-    transition: transform 0.3s ease;
-}
-
-.weather-refresh:active svg {
-    transform: rotate(180deg);
-}
-
-/* ===== QUICK ACCESS ===== */
 .shortcuts-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-    flex: 1;
+    gap: 0.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: auto;
 }
 
 .shortcut-btn {
-    height: 100%;
-    min-height: 4rem;
-    background: var(--bg-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.75rem;
-    color: var(--text-primary);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
+    min-height: 3.1rem;
+    font-size: 0.9rem;
+    display: grid;
+    place-items: center;
 }
 
-.shortcut-btn:hover {
-    background: var(--bg-card-hover);
-    border-color: var(--accent-primary);
-    transform: scale(1.05);
+.app-modal { display: none !important; }
+
+@media (max-width: 1400px) {
+    .dashboard-grid.carplay-layout { grid-template-columns: 5rem minmax(0, 1fr); }
+    .content-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-rows: auto;
+        overflow-y: auto;
+        padding-right: 0.2rem;
+    }
+    .navigation-hub,
+    .media-hub,
+    .messaging-hub.telegram,
+    .messaging-hub.whatsapp,
+    .weather-widget,
+    .quick-access { grid-column: span 3; grid-row: auto; min-height: 15rem; }
 }
 
-.shortcut-btn:active {
-    transform: scale(0.95);
-}
-
-.shortcut-btn svg {
-    color: var(--accent-primary);
-}
-
-/* ===== APP MODAL (Legacy - puede eliminarse) ===== */
-.app-modal {
-    display: none !important;
-}
-
-/* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 1024px) {
-    .dashboard-grid {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(4, 1fr);
+    .dashboard-header { padding-inline: 1rem; }
+    .dashboard-grid.carplay-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        padding: 0.8rem;
     }
-    
-    .navigation-hub {
-        grid-column: 1 / 5;
-        grid-row: 1 / 2;
+    .app-sidebar {
+        flex-direction: row;
+        overflow-x: auto;
+        justify-content: flex-start;
+        border-radius: 1.2rem;
     }
-    
-    .media-hub {
-        grid-column: 1 / 5;
-        grid-row: 2 / 3;
-    }
-    
-    .messaging-hub.telegram {
-        grid-column: 1 / 3;
-        grid-row: 3 / 4;
-    }
-    
-    .messaging-hub.whatsapp {
-        grid-column: 3 / 5;
-        grid-row: 3 / 4;
-    }
-    
-    .weather-widget {
-        grid-column: 1 / 3;
-        grid-row: 4 / 5;
+    .sidebar-app {
+        min-width: 4.2rem;
+        min-height: 4rem;
     }
     
     .quick-access {

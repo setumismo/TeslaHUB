@@ -230,6 +230,7 @@ function initializeDashboard() {
     
     // Animación de entrada para las cards
     animateCardsOnLoad();
+    initializeSidebarFocus();
     
     // Wake lock para evitar que la pantalla se apague
     requestWakeLock();
@@ -237,6 +238,24 @@ function initializeDashboard() {
     console.log('✅ Dashboard inicializado correctamente');
 }
 
+
+function initializeSidebarFocus() {
+    const sidebarButtons = document.querySelectorAll('.sidebar-app');
+    if (!sidebarButtons.length) return;
+
+    sidebarButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            sidebarButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const target = button.dataset.target;
+            const targetCard = document.querySelector(`.grid-item[data-app="${target}"]`);
+            if (targetCard) {
+                targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+            }
+        });
+    });
+}
 // ===== ANIMACIONES =====
 function animateCardsOnLoad() {
     const cards = document.querySelectorAll('.grid-item');

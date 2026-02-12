@@ -111,57 +111,20 @@
                                 <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
                                 </svg>
-                                <h2>Navegación</h2>
-                            </div>
-                            <div class="nav-options">
-                                <button class="nav-btn primary" onclick="openApp('https://waze.com/live-map')">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                                    </svg>
-                                    <span>Waze</span>
-                                </button>
-                                <button class="nav-btn primary" onclick="openApp('https://www.google.com/maps')">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                                    </svg>
-                                    <span>Google Maps</span>
-                                </button>
-                            </div>
-                            <form class="route-form" onsubmit="event.preventDefault(); handleRouteSubmit();">
-                                <div class="route-form-row">
-                                    <input type="text" id="routeOrigin" placeholder="Origen" required>
-                                    <input type="text" id="routeDestination" placeholder="Destino" required>
-                                </div>
-                                <button type="submit" class="route-submit-btn">Abrir ruta en Google Maps</button>
-                            </form>
-                            <div class="boardinggate-section">
-                                <div class="bg-label">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                        <circle cx="12" cy="10" r="3"></circle>
-                                    </svg>
-                                    <span>Tesla Navigator Avanzado</span>
-                                </div>
-                                <div class="bg-buttons">
-                                    <button class="nav-btn boardinggate original" onclick="openApp('https://boardinggate.github.io/Tesla/tesla.html')">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                            <polyline points="15 3 21 3 21 9"></polyline>
-                                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                                        </svg>
-                                        <span>BoardingGate Original</span>
-                                    </button>
-                                    <button class="nav-btn boardinggate local" onclick="openLocalNavigator()">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M3 3h18v18H3z"></path>
-                                            <path d="M8 12l3 3 5-5"></path>
-                                        </svg>
-                                        <span>Navegador Local</span>
-                                    </button>
-                                </div>
-                            </div>
+                                <span>Navigator Local</span>
+                            </button>
                         </div>
-                    </section>
+                    </div>
+                    <div class="quick-info">
+                        <div class="info-badge">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>Navegación en tiempo real</span>
+                        </div>
+                    </div>
+                </section>
 
                     <!-- Spotify -->
                     <section class="grid-item media-hub" data-app="media">

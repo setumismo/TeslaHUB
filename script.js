@@ -1,3 +1,17 @@
+const APP_URLS = {
+    waze: 'https://waze.com/live-map',
+    googleMapsPlanning: 'https://www.google.com/maps/dir/',
+    spotifyWeb: 'https://open.spotify.com',
+    youtubeMusic: 'https://music.youtube.com',
+    youtube: 'https://www.youtube.com',
+    telegramWeb: 'https://web.telegram.org',
+    whatsappWeb: 'https://web.whatsapp.com',
+    googleSearch: 'https://www.google.com',
+    googleCalendar: 'https://calendar.google.com',
+    boardingGateOriginal: 'https://boardinggate.github.io/Tesla/tesla.html',
+    localNavigator: 'navigator.html'
+};
+
 // ===== INICIALIZACIÓN =====
 document.addEventListener('DOMContentLoaded', () => {
     initializeDashboard();
@@ -126,9 +140,20 @@ function openApp(url) {
     window.open(url, '_blank', 'fullscreen=yes,location=yes,menubar=no,toolbar=yes,status=yes,scrollbars=yes,resizable=yes');
 }
 
+function openAppByKey(appKey) {
+    const appUrl = APP_URLS[appKey];
+
+    if (!appUrl) {
+        console.warn(`App no configurada para la clave: ${appKey}`);
+        return;
+    }
+
+    openApp(appUrl);
+}
+
 function openLocalNavigator() {
     // Abrir el navegador local integrado
-    window.open('navigator.html', '_blank', 'fullscreen=yes,location=yes,menubar=no,toolbar=yes,status=yes,scrollbars=yes,resizable=yes');
+    openAppByKey('localNavigator');
 }
 
 
@@ -363,7 +388,9 @@ if ('performance' in window) {
 
 // ===== EXPORT PARA DEBUGGING =====
 window.TeslaDashboard = {
+    APP_URLS,
     openApp,
+    openAppByKey,
     closeApp,
     toggleFullscreen,
     loadWeather,
